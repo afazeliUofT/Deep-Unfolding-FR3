@@ -11,6 +11,8 @@ import sys
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SRC = REPO_ROOT / "src"
+DATA = REPO_ROOT / "data"
+ISED_DIR = DATA / "ised_sms"
 for p in (REPO_ROOT, SRC):
     if str(p) not in sys.path:
         sys.path.insert(0, str(p))
@@ -36,10 +38,10 @@ def spec_origin(name: str) -> str:
     return "found"
 
 
-def src_children() -> str:
-    if not SRC.exists():
-        return "<missing src directory>"
-    names = sorted(p.name for p in SRC.iterdir() if p.is_dir())
+def dir_children(path: Path) -> str:
+    if not path.exists():
+        return "<missing directory>"
+    names = sorted(p.name for p in path.iterdir() if p.is_dir())
     return ", ".join(names) if names else "<no subdirectories>"
 
 
@@ -56,7 +58,10 @@ def main() -> int:
     print(f"Repo root exists  : {REPO_ROOT.exists()}")
     print(f"Src dir           : {SRC}")
     print(f"Src dir exists    : {SRC.exists()}")
-    print(f"Src entries       : {src_children()}")
+    print(f"Src entries       : {dir_children(SRC)}")
+    print(f"Data dir          : {DATA}")
+    print(f"Data dir exists   : {DATA.exists()}")
+    print(f"Data entries      : {dir_children(DATA)}")
     print(f"sys.path[0:4]     : {sys.path[:4]}")
     print(f"tensorflow        : {pkg_ver('tensorflow')}")
     print(f"sionna-no-rt      : {pkg_ver('sionna-no-rt')}")
@@ -67,10 +72,14 @@ def main() -> int:
 
     if not (SRC / "fr3_sim").exists():
         failures.append(
-            f"Required directory missing: {SRC / 'fr3_sim'} (restore with: git restore src/fr3_sim || git checkout HEAD -- src/fr3_sim)"
+            f"Required directory missing: {SRC / 'fr3_sim'} (recover with: bash scripts/recover_legacy_tree.sh)"
         )
     if not (SRC / "fr3_twc").exists():
         failures.append(f"Required directory missing: {SRC / 'fr3_twc'}")
+    if not ISED_DIR.exists():
+        failures.append(
+            f"Required directory missing: {ISED_DIR} (recover with: bash scripts/recover_legacy_tree.sh)"
+        )
 
     try:
         import tensorflow as tf
