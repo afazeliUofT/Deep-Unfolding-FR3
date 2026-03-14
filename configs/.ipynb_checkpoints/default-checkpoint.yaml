@@ -1,0 +1,364 @@
+# Default configuration (baseline) following 20260104_FR3_system_model_V2_STEP1_PATCHED.tex
+# Scope: classical WMMSE baseline up to (but not including) deep unfolding.
+
+reproducibility:
+  seed: 1
+  deterministic_tf: true
+  precision: "single"   # "single" | "double"
+
+system_model:
+  carrier_frequency_hz: 8.2e+9
+  subcarrier_spacing_hz: 120000.0
+
+  # Paper parameter: |N| = 1667 resource elements for B_tot=200 MHz, Δf=120 kHz.
+  num_re_total: 1667
+
+  # To keep the baseline runnable on a single PC, the simulator can emulate the full band
+  # with fewer simulated resource elements and internally scales constraints accordingly.
+  num_re_sim: 1
+
+  # If true, the simulation explicitly uses num_re_total REs (may be very heavy).
+  simulate_full_band: false
+
+  # Base station TX power budget (total across the whole band)
+  bs_total_tx_power_dbm: 49.0
+
+  # User weights ξ_{b,u}
+  user_weight_xi: 1.0
+
+noise:
+  # UE noise model (paper: NF=9 dB, σ_u^2=-114.2 dBm per RE)
+  ue_noise_figure_db: 9.0
+  temperature_K: 290.0
+
+  # Additional dB offset applied on top of the computed thermal+NF noise.
+  # This is the default knob for an SNR sweep without changing the power budget.
+  extra_noise_db: 0.0
+
+topology:
+  layout: pcp
+  xy_offset_m: [0.0, 0.0]
+  scenario: umi
+  num_rings: 4
+  num_ut_per_sector: 10
+
+  # NOTE: repo expects isd_m (NOT cell_isd_m)
+  isd_m: 200.0
+  enable_wrap_around: true
+
+  bs_height_m: 10.0
+
+  # NOTE: repo expects min/max_ut_height_m (NOT ut_height_m)
+  min_ut_height_m: 1.5
+  max_ut_height_m: 1.5
+
+  # Indoor probability is used by Sionna; we also preserve ut_is_indoor in TopologyData
+  indoor_probability: 0.8
+
+  downtilt_to_sector_center: true
+
+
+  pcp:
+    num_sites: 61
+    sectors_per_site: 3
+    use_fs_as_parents: true
+    
+    ue_cluster_radius_m: 80.0
+    
+    
+
+    # Make hotspots near FS but NOT exactly at FS (avoid the "FS at center" look)
+    hotspot_jitter_sigma_m: 400.0
+
+    # BS sites scattered around those hotspots (controls wide-area spread)
+    bs_cluster_sigma_m: 1200.0
+    # optional clamp
+    # bs_cluster_radius_max_m: 4000.0
+
+    # UE cloud around each sector (cell radius-like)
+    ue_cluster_radius_m: 100.0  # for ISD=200m, this is a reasonable start
+
+    # Add some "background" BS sites across GTA footprint (makes it look more random-like)
+    background_sites_fraction: 0.25
+    background_bbox_margin_m: 3000.0
+
+    land_constraint:
+      enabled: true
+
+      # Lake Ontario north-shore line (WGS84).
+      # IMPORTANT: p1 is WEST, p2 is EAST. keep_side: left keeps the LAND side.
+      line_latlon_wgs84:
+        - [43.30, -80.20]   # p1 (west)
+        - [43.944, -78.60]  # p2 (east)
+
+      keep_side: left
+      buffer_m: 1000.0   # push sites at least this far to the kept side (meters)
+
+
+
+
+
+channel_model:
+  num_bs_ant: 32
+  num_ut_ant: 4
+  h_e_m: 1.0
+
+  # UE UMi pathloss stays TR 38.901-based
+  pathloss_model: tr38901_umi_street_canyon
+
+  shadow_fading_enable: true
+  shadow_fading_std_los_db: 4.0
+  shadow_fading_std_nlos_db: 7.82
+
+  # 3GPP O2I building penetration model (TR 38.901)
+  o2i:
+    enabled: true
+    model: 3gpp_low_high
+
+    # ITU-R M.2412 example assumption: 20% high-loss / 80% low-loss
+    building_type_probs:
+      low_loss: 0.8
+      high_loss: 0.2
+
+    # Keep 0–25 m, but use min(d1,d2) option for a closer 3GPP-style sampling
+    indoor_distance_m:
+      dist: min_of_two_uniform
+      low_m: 0.0
+      high_m: 25.0
+
+    inside_loss_coeff_db_per_m: 0.5
+
+    # TR 38.901 typical values for O2I shadowing (you already set these)
+    shadow_fading_std_db:
+      low_loss: 4.4
+      high_loss: 6.5
+
+
+fixed_service:
+  enabled: true
+  num_receivers: 12
+
+  # Fallback defaults (used only when an ISED field is missing or ised_sms.enabled=false)
+  rx_bandwidth_hz: 30000000.0
+  noise_figure_db: 5.0
+  in_target_db: -10.0
+  noise_power_dbm: null
+  i_max_dbm_override: null
+
+  # When sweeping fs_in_target_db:
+  # - scalar = overwrite all FS i_max to the scalar I/N result
+  # - scale  = scale the existing per-FS i_max by the delta in in_target_db (recommended)
+  # - none   = do not override i_max during sweep
+  sweep_override_i_max: none
+
+  placement:
+    mode: uniform_in_hexgrid_bbox
+    margin_m: 3000.0
+
+  # Per-receiver I_max: RX threshold - TI objective (fallbacks to I/N if missing)
+  i_max:
+    # FS-CSV-only mode: do NOT require radio_reference_csv TI objective
+    mode: noise_plus_in_target
+    # This field becomes irrelevant in this mode, but keep it explicit to avoid accidental RR joins
+    ti_objective_source: none
+    # I/N target in dB (I = N * 10^(I/N/10))
+    in_target_db: -10.0
+    # Optional: if you want to hard-set FS noise power instead of kTB+NF, uncomment:
+    # noise_power_dbm: -94.0
+
+  # ISED SMS loader (GTA RX filtering + overlap filtering)
+  ised_sms:
+    enabled: true
+    fixed_service_csv: '../data/ised_sms/ised_sms_fixed_service_20250722_header_optimized_7to15GHz.csv'
+    radio_reference_csv: null ### 'C:\Users\alifa\OneDrive\Projects\FR3_System_Model\raw_HeaderOpt_7_15GHz\ised_sms_radio_reference_data_20250722_header_optimized_7to15GHz.csv'
+    antenna_reference_csv: null ### 'C:\Users\alifa\OneDrive\Projects\FR3_System_Model\raw_HeaderOpt_7_15GHz\ised_sms_antenna_reference_data_20250722_header_optimized_7to15GHz.csv'
+    selection:
+      gta_bbox:
+        lat_min: 43.50
+        lat_max: 44.25
+        lon_min: -80.20
+        lon_max: -78.60
+      station_function_regex: "(?i)RX"
+      overlap_with_gnb_band: true
+
+      # "rescale_to_hexgrid_bbox" maps GTA points into your simulated hexgrid bounding box
+      location_mode: raw_meters #### rescale_to_hexgrid_bbox
+      clip_to_bbox: false
+
+      # Used only for ENU conversion; rescale mode doesn’t depend heavily on this
+      origin_latlon_wgs84: [43.6532, -79.3832]
+
+      sample_mode: random_without_replacement
+      freq_range_mhz: [7000.0, 15000.0]
+      random_seed: 1231
+
+  # ISED-derived parametric fits (fallbacks)
+  parameters:
+    source: ised_sms_analysis
+
+    frequency_mhz:
+      dist: trunc_normal
+      mu: 8200
+      sigma: 600
+      min: 7000
+      max: 15000
+
+    occupied_bw_khz:
+      dist: lognormal
+      mu_ln: 10.308952660644293  # ln(30000)
+      sigma_ln: 0.35
+      min: 5000
+      max: 55700
+
+    height_agl_m:
+      dist: lognormal
+      mu_ln: 3.8501      # ln(47)
+      sigma_ln: 0.9546   # chosen so 95% ~226 m
+      min: 5.0
+      max: 377.0
+      unit: m
+
+    antenna_gain_dbi:
+      dist: trunc_normal
+      mu: 40.98
+      sigma: 3.5
+      min: 13.0
+      max: 46.4
+
+    # Your GTA probe shows ~5.686% have beamwidth >=180° and many are 360°.
+    # This mixture preserves that tail.
+    beamwidth_3db_deg:
+      dist: mixture
+      components:
+        - weight: 0.943
+          dist: trunc_normal
+          mu: 1.6
+          sigma: 0.6
+          min: 0.6
+          max: 10.0
+        - weight: 0.057
+          dist: point_mass
+          value: 360.0
+
+    azimuth_deg:
+      dist: uniform
+      low: 0.0
+      high: 360.0
+
+    rx_threshold_dbw_ber1e3:
+      dist: trunc_normal
+      mu: -97.5
+      sigma: 4.0
+      min: -120.0
+      max: -80.0
+
+    # Empirical fallback (normalized from your “top-10” counts over the 680 rows)
+    ti_objective_db:
+      dist: categorical
+      categories: [34.6, 36.0, 43.6, 38.44, 28.1, 46.6, 49.6, 32.9, 39.7, 21.35]
+      probs: [0.13392857, 0.13244048, 0.13244048, 0.10714286, 0.10714286, 0.10119048, 0.09672619, 0.08482143, 0.05952381, 0.04464286]
+
+  antenna:
+    # Required for hard_null enforcement (rank-1 steering vectors)
+    correlation: steering_rank1
+    kappa_ant: 1.0
+    l_ant_db: 0.0
+    rx_pattern:
+      enabled: true
+      pattern: 3gpp_tr38901
+      a_max_db: 30.0
+
+  pathloss:
+    model: itu_p1411_above_rooftop_avg
+
+    # Keep the existing mixing approach: LoS probability comes from here
+    # (still a simplification because we don't have building maps)
+    los_probability_model: 3gpp_umi_street_canyon
+
+    # Use P.1411 Table-8 shadowing standard deviations (dB)
+    shadow_fading_std_los_db: 3.48
+    shadow_fading_std_nlos_db: 6.89
+
+    # ITU-R P.1411-13 ABG coefficients (Table 8, above-rooftop)
+    itu_p1411_abg:
+      alpha_los: 2.29
+      beta_los: 28.6
+      gamma_los: 1.96
+
+      alpha_nlos: 4.39
+      beta_nlos: -6.27
+      gamma_nlos: 2.30
+
+      # Guardrails
+      clamp_to_fspl: true
+      d_min_los_m: 55.0
+      d_min_nlos_m: 260.0
+
+    
+receiver:
+  name: wmmse
+  wmmse:
+    # required by config._generate_fs_from_ised_sms
+
+
+    num_iterations: 20
+
+    # important: actually enable FS constraint handling
+    fs_enforcement: budget_dual
+
+    # these were previously mis-indented under fixed_service.pathloss
+    fs_lambda_search: true
+
+
+    fs_lambda_search_tol_db: 0.2
+    fs_lambda_min: 0.0
+    fs_lambda_max: 1.0e+24
+    fs_lambda_search_max_iter: 30
+
+
+    dual_step_mu: 0.01
+    dual_step_lambda: 0.01
+    damping_w: 1.0
+    init: random_scaled
+    stop_criterion: delta_w_norm
+    verbose: false
+
+    # optional but good to pin explicitly (receiver.py has defaults)
+    ridge_regularization: 1.0e-9
+    convergence_tol: 1.0e-6
+    lambda_update_mode: ratio
+
+
+
+experiment:
+  # Monte-Carlo averaging
+  batch_size: 1
+  num_batches: 5
+  freeze_topology: true
+
+  # Optional tf.function compilation (can speed things up once stable)
+  tf_compile: false
+
+sweep:
+  enabled: true
+
+  # Supported variables in this starter codebase:
+  #  - snr_db : implemented as an extra noise offset (noise.extra_noise_db)
+  #  - fs_in_target_db : overrides fixed_service.in_target_db
+  variable: "snr_db"
+  values: [0.0]
+
+output:
+  results_root: "results"
+  experiment_name: "baseline_wmmse"
+  overwrite: false
+
+  # What to save
+  save_config_resolved: true
+  save_metrics_csv: true
+  save_plots: true
+
+plotting:
+  enabled: true
+  format: "png"
+  dpi: 200
