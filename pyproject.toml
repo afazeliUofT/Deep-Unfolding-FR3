@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "deep-unfolding-fr3"
+version = "0.1.0"
+description = "FR3 coexistence baseline plus TWC upgrade package"
+requires-python = ">=3.10,<3.13"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["fr3_sim*", "fr3_twc*"]

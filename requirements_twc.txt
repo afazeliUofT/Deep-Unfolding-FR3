@@ -1,0 +1,9 @@
+setuptools>=68
+wheel
+numpy>=1.26,<2.1
+pandas>=2.1,<2.3
+PyYAML>=6.0
+matplotlib>=3.8,<3.10
+tqdm>=4.66
+tensorflow>=2.14,<2.20
+sionna-no-rt==1.2.1
