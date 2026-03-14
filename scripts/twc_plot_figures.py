@@ -9,8 +9,9 @@ import pandas as pd
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SRC = REPO_ROOT / "src"
-if str(SRC) not in sys.path:
-    sys.path.insert(0, str(SRC))
+for p in (REPO_ROOT, SRC):
+    if str(p) not in sys.path:
+        sys.path.insert(0, str(p))
 
 from fr3_sim.config import load_config
 from fr3_twc.config_utils import results_root_dir
