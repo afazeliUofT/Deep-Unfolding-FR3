@@ -4,8 +4,7 @@ from __future__ import annotations
 
 from dataclasses import replace
 from pathlib import Path
-import time
-from typing import Any, Dict, Iterable, List, Tuple, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
 import pandas as pd
@@ -13,7 +12,7 @@ import tensorflow as tf
 
 from fr3_sim.seeding import set_global_seed
 
-from .algorithms import risk_neutral_pgd, static_notch_mf, wideband_pgd_baseline
+from .algorithms import objective_terms, risk_neutral_pgd, static_notch_mf, wideband_pgd_baseline
 from .config_utils import results_root_dir, twc_get
 from .figures import generate_all_figures
 from .io import ensure_dir, save_json
@@ -39,7 +38,7 @@ def _clone_batch_with_user_weights(batch: WidebandBatch, weights: tf.Tensor, pro
 
 
 def _weight_vector_for_profile(batch: WidebandBatch, profile: str) -> tf.Tensor:
-    # Build directly from the current batch to ensure the same geometry across profiles
+    """Build profile weights on the exact same geometry for fair comparison."""
     u = int(batch.user_weights.shape[0])
     if profile in ("uniform", "default"):
         return tf.ones_like(batch.user_weights)
@@ -87,13 +86,12 @@ def _train(cfg: Any, pipe_dir: Path) -> Tuple[Optional[ScenarioAdaptiveUnfolded]
     best_path = ckpt_dir / "unfolded.weights.h5"
 
     for epoch in range(1, epochs + 1):
-        train_losses = []
-        train_utils = []
+        train_losses: List[float] = []
+        train_utils: List[float] = []
         for _ in range(steps_per_epoch):
             batch = build_wideband_batch(cfg, batch_size=train_batch_size, user_weight_profile="uniform")
             with tf.GradientTape() as tape:
                 w, _ = model(batch=batch, training=True)
-                from .algorithms import objective_terms
                 terms = objective_terms(
                     batch=batch,
                     w=w,
@@ -105,15 +103,15 @@ def _train(cfg: Any, pipe_dir: Path) -> Tuple[Optional[ScenarioAdaptiveUnfolded]
                 loss = terms["loss"]
             grads = tape.gradient(loss, model.trainable_variables)
             grads_and_vars = [(g, v) for g, v in zip(grads, model.trainable_variables) if g is not None]
-            opt.apply_gradients(grads_and_vars)
+            if grads_and_vars:
+                opt.apply_gradients(grads_and_vars)
             train_losses.append(float(loss.numpy()))
             train_utils.append(float(terms["utility"].numpy()))
 
-        val_losses = []
+        val_losses: List[float] = []
         for _ in range(val_batches):
             batch_val = build_wideband_batch(cfg, batch_size=train_batch_size, user_weight_profile="uniform")
             w_val, _ = model(batch=batch_val, training=False)
-            from .algorithms import objective_terms
             terms_val = objective_terms(
                 batch=batch_val,
                 w=w_val,
@@ -123,6 +121,7 @@ def _train(cfg: Any, pipe_dir: Path) -> Tuple[Optional[ScenarioAdaptiveUnfolded]
                 alpha_cvar=alpha_cvar,
             )
             val_losses.append(float(terms_val["loss"].numpy()))
+
         mean_train = float(np.mean(train_losses)) if train_losses else np.nan
         mean_val = float(np.mean(val_losses)) if val_losses else np.nan
         rows.append(
@@ -146,6 +145,30 @@ def _train(cfg: Any, pipe_dir: Path) -> Tuple[Optional[ScenarioAdaptiveUnfolded]
     return model, hist_df
 
 
+def _parse_legacy_run_tag(path_name: str) -> Tuple[str, str]:
+    """Split legacy directory name into (algorithm_name, sortable_run_tag)."""
+    parts = str(path_name).split("_")
+    if len(parts) >= 4 and parts[-2].isdigit() and parts[-1].isdigit():
+        algo_name = "_".join(parts[:-2])
+        run_tag = f"{parts[-2]}_{parts[-1]}"
+        return algo_name, run_tag
+    return str(path_name), str(path_name)
+
+
+def _latest_legacy_metric_files(root_dir: Path) -> Dict[str, Path]:
+    """Keep only the latest legacy metrics file per algorithm.
+
+    This avoids duplicate legacy rows when legacy_baseline has multiple timestamped runs.
+    """
+    selected: Dict[str, Tuple[str, Path]] = {}
+    for metric_path in sorted((root_dir / "legacy_baseline").glob("*/metrics.csv")):
+        algo_name, run_tag = _parse_legacy_run_tag(metric_path.parent.name)
+        prev = selected.get(algo_name)
+        if prev is None or run_tag > prev[0]:
+            selected[algo_name] = (run_tag, metric_path)
+    return {algo_name: metric_path for algo_name, (_, metric_path) in selected.items()}
+
+
 def run_pipeline(cfg: Any) -> str:
     """Run the full TWC pipeline."""
     seed = int(cfg.raw["reproducibility"]["seed"])
@@ -156,7 +179,6 @@ def run_pipeline(cfg: Any) -> str:
     pipe_dir = ensure_dir(root_dir / "twc_pipeline")
     fig_dir = ensure_dir(pipe_dir / "figures")
 
-    # Save high-level config metadata
     save_json(
         pipe_dir / "run_metadata.json",
         {
@@ -169,7 +191,7 @@ def run_pipeline(cfg: Any) -> str:
         },
     )
 
-    unfolded_model, training_hist_df = _train(cfg, pipe_dir)
+    unfolded_model, _training_hist_df = _train(cfg, pipe_dir)
 
     eval_batch_size = int(twc_get(cfg, ("eval", "batch_size"), 2))
     eval_num_batches = int(twc_get(cfg, ("eval", "num_batches"), 6))
@@ -185,7 +207,11 @@ def run_pipeline(cfg: Any) -> str:
     for fs_budget in fs_budget_values:
         for _ in range(eval_num_batches):
             batch = build_wideband_batch(cfg, batch_size=eval_batch_size, user_weight_profile="uniform")
-            batch = _clone_batch_with_fs_budget(batch, fs_in_target_db=float(fs_budget), base_fs_in_target_db=base_fs_budget)
+            batch = _clone_batch_with_fs_budget(
+                batch,
+                fs_in_target_db=float(fs_budget),
+                base_fs_in_target_db=base_fs_budget,
+            )
             alg_results = _run_algorithms(cfg, batch, unfolded_model)
             for res in alg_results:
                 summary, rows = summarize_algorithm(
@@ -207,15 +233,14 @@ def run_pipeline(cfg: Any) -> str:
     if not history_df.empty:
         history_df.to_csv(pipe_dir / "algorithm_history.csv", index=False)
 
-    # Tone-grouping analysis
     tone_group_sizes = list(twc_get(cfg, ("eval", "tone_group_sizes"), [1, 2, 4, 8]))
     tone_df = tone_grouping_error(batch_reference, group_sizes=tone_group_sizes)
     tone_df.to_csv(pipe_dir / "tone_grouping_error.csv", index=False)
 
-    # Weight sensitivity
-    weight_profiles = list(twc_get(cfg, ("eval", "user_weight_profiles"), ["uniform", "inverse_serving_gain", "hotspot_priority", "lognormal"]))
+    weight_profiles = list(
+        twc_get(cfg, ("eval", "user_weight_profiles"), ["uniform", "inverse_serving_gain", "hotspot_priority", "lognormal"])
+    )
     weight_rows: List[Dict[str, float]] = []
-
     weight_num_batches = int(twc_get(cfg, ("eval", "num_batches"), 6))
     for sample_idx in range(weight_num_batches):
         batch_ref = build_wideband_batch(cfg, batch_size=eval_batch_size, user_weight_profile="uniform")
@@ -237,25 +262,16 @@ def run_pipeline(cfg: Any) -> str:
     weight_df = pd.DataFrame(weight_rows)
     weight_df.to_csv(pipe_dir / "user_weight_sensitivity.csv", index=False)
 
-    # Attach legacy baseline if available
-    legacy_summary_paths = sorted((root_dir / "legacy_baseline").glob("*/metrics.csv"))
-    if legacy_summary_paths:
-        legacy_rows = []
-
-        def _legacy_algorithm_name(path_name: str) -> str:
-            parts = str(path_name).split("_")
-            if len(parts) >= 4 and parts[-2].isdigit() and parts[-1].isdigit():
-                return "_".join(parts[:-2])
-            return str(path_name)
-
-        for p in legacy_summary_paths:
+    legacy_metric_files = _latest_legacy_metric_files(root_dir)
+    if legacy_metric_files:
+        legacy_rows: List[Dict[str, float]] = []
+        for algo_name, metric_path in sorted(legacy_metric_files.items()):
             try:
-                df = pd.read_csv(p)
+                df = pd.read_csv(metric_path)
             except Exception:
                 continue
             if df.empty:
                 continue
-            algo_name = _legacy_algorithm_name(p.parent.name)
             for _, row in df.iterrows():
                 row = row.to_dict()
                 legacy_rows.append(
