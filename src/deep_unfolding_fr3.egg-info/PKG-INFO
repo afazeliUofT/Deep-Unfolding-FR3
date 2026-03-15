@@ -1,0 +1,5 @@
+Metadata-Version: 2.4
+Name: deep-unfolding-fr3
+Version: 0.1.1
+Summary: FR3 coexistence baseline plus TWC upgrade package
+Requires-Python: <3.13,>=3.10
