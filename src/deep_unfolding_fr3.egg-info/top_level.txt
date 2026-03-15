@@ -1,2 +1,0 @@
-fr3_sim
-fr3_twc

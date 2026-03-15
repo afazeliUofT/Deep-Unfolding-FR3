@@ -1,8 +1,0 @@
-{
-  "experiment_name": "twc_smoke_bundle",
-  "num_bs": 9,
-  "num_re_sim": 12,
-  "num_ut": 18,
-  "seed": 1,
-  "u_per_bs": 2
-}
