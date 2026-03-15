@@ -1,4 +1,0 @@
-avg_sinr_db,avg_user_rate_bps_per_hz,converged,max_bs_power_violation_watt,max_bs_power_watt,max_fs_interference_watt,max_fs_violation_watt,num_iter,sum_rate_bps_per_hz,sweep_variable,sweep_value,snr_db,bs_total_tx_power_dbm,fs_in_target_db
--18.294358491897583,3.98249751329422,0.0,0.0,59.72355675697327,6.016694888954112e-17,0.0,20.0,167.264892578125,fs_in_target_db,-6.0,0.0,49.0,-6.0
--16.519635915756226,4.262510299682617,0.0,0.0,79.43268966674805,4.4023070842316204e-17,0.0,20.0,179.02544021606445,fs_in_target_db,-10.0,0.0,49.0,-10.0
--15.809738874435425,4.259087443351746,0.0,0.0,61.70878720283508,4.1691873216891696e-17,0.0,20.0,178.88167572021484,fs_in_target_db,-14.0,0.0,49.0,-14.0

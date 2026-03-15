@@ -1,8 +1,0 @@
-{
-  "experiment_name": "twc_full_bundle",
-  "num_bs": 21,
-  "num_re_sim": 24,
-  "num_ut": 42,
-  "seed": 1,
-  "u_per_bs": 2
-}
