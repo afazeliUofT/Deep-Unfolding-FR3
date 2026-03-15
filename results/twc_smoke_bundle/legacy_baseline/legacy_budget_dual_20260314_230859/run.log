@@ -1,0 +1,33 @@
+2026-03-14 23:08:59,844 | INFO | Experiment directory: results/twc_smoke_bundle/legacy_baseline/legacy_budget_dual_20260314_230859
+2026-03-14 23:08:59,854 | INFO | Selected derived parameters: {'bandwidth_sim_hz': 1440000.0, 'bandwidth_total_hz': 200040000.0, 'bs_power_budget_sim_watt': 0.5718021312729642, 'bs_total_tx_power_watt': 79.43284606933594, 'config_dir': '/home/rsadve1/FR3_DeepUnfolding/configs', 'config_path': '/home/rsadve1/FR3_DeepUnfolding/configs/twc_smoke.yaml', 'fixed_service_enabled': True, 'fs_i_max_dbm': -104.22878745280337, 'fs_i_max_watt': 3.776772528074103e-14, 'fs_noise_dbm': -94.22878745280337, 'fs_noise_watt': 3.776772460311467e-13, 'num_bs': 9, 'num_cells': 3, 'num_re_sim': 12, 'num_ut': 18, 're_scaling': 138.91666666666666, 'tf_precision': 'single', 'u_per_bs': 2, 'ue_noise_re_dbm': -114.20818753952375, 'ue_noise_re_watt': 3.794728779522947e-15, 'warning_non_integer_re_scaling': True}
+2026-03-14 23:08:59,865 | INFO | freeze_topology=True -> using a single fixed BS/UE geometry for all batches and sweep points.
+2026-03-14 23:09:03,299 | INFO | Sweep enabled=True variable=fs_in_target_db values=[-6.0, -10.0, -14.0]
+2026-03-14 23:09:03,299 | INFO | Monte Carlo: num_batches=2 batch_size=1
+2026-03-14 23:09:03,299 | INFO | Fixed service enabled=True
+2026-03-14 23:09:03,301 | INFO | Sweep point fs_in_target_db=-6.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=9.487e-14 W
+2026-03-14 23:09:30,159 | INFO | Sweep point fs_in_target_db=-10.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=3.777e-14 W
+2026-03-14 23:09:56,327 | INFO | Sweep point fs_in_target_db=-14.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=1.504e-14 W
+2026-03-14 23:10:09,916 | INFO | Saved metrics to results/twc_smoke_bundle/legacy_baseline/legacy_budget_dual_20260314_230859/metrics.csv
+2026-03-14 23:10:10,146 | INFO | Saved plot to results/twc_smoke_bundle/legacy_baseline/legacy_budget_dual_20260314_230859/figures/summary.png
+2026-03-14 23:10:10,185 | INFO | Experiment directory: results/twc_smoke_bundle/legacy_baseline/legacy_hard_null_20260314_231010
+2026-03-14 23:10:10,185 | INFO | Selected derived parameters: {'bandwidth_sim_hz': 1440000.0, 'bandwidth_total_hz': 200040000.0, 'bs_power_budget_sim_watt': 0.5718021312729642, 'bs_total_tx_power_watt': 79.43284606933594, 'config_dir': '/home/rsadve1/FR3_DeepUnfolding/configs', 'config_path': '/home/rsadve1/FR3_DeepUnfolding/configs/twc_smoke.yaml', 'fixed_service_enabled': True, 'fs_i_max_dbm': -104.22878745280337, 'fs_i_max_watt': 3.776772528074103e-14, 'fs_noise_dbm': -94.22878745280337, 'fs_noise_watt': 3.776772460311467e-13, 'num_bs': 9, 'num_cells': 3, 'num_re_sim': 12, 'num_ut': 18, 're_scaling': 138.91666666666666, 'tf_precision': 'single', 'u_per_bs': 2, 'ue_noise_re_dbm': -114.20818753952375, 'ue_noise_re_watt': 3.794728779522947e-15, 'warning_non_integer_re_scaling': True}
+2026-03-14 23:10:10,196 | INFO | freeze_topology=True -> using a single fixed BS/UE geometry for all batches and sweep points.
+2026-03-14 23:10:10,336 | INFO | Sweep enabled=True variable=fs_in_target_db values=[-6.0, -10.0, -14.0]
+2026-03-14 23:10:10,337 | INFO | Monte Carlo: num_batches=2 batch_size=1
+2026-03-14 23:10:10,337 | INFO | Fixed service enabled=True
+2026-03-14 23:10:10,338 | INFO | Sweep point fs_in_target_db=-6.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=9.487e-14 W
+2026-03-14 23:10:11,303 | INFO | Sweep point fs_in_target_db=-10.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=3.777e-14 W
+2026-03-14 23:10:12,221 | INFO | Sweep point fs_in_target_db=-14.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=1.504e-14 W
+2026-03-14 23:10:13,170 | INFO | Saved metrics to results/twc_smoke_bundle/legacy_baseline/legacy_hard_null_20260314_231010/metrics.csv
+2026-03-14 23:10:13,328 | INFO | Saved plot to results/twc_smoke_bundle/legacy_baseline/legacy_hard_null_20260314_231010/figures/summary.png
+2026-03-14 23:10:13,365 | INFO | Experiment directory: results/twc_smoke_bundle/legacy_baseline/legacy_no_fs_20260314_231013
+2026-03-14 23:10:13,365 | INFO | Selected derived parameters: {'bandwidth_sim_hz': 1440000.0, 'bandwidth_total_hz': 200040000.0, 'bs_power_budget_sim_watt': 0.5718021312729642, 'bs_total_tx_power_watt': 79.43284606933594, 'config_dir': '/home/rsadve1/FR3_DeepUnfolding/configs', 'config_path': '/home/rsadve1/FR3_DeepUnfolding/configs/twc_smoke.yaml', 'fixed_service_enabled': True, 'fs_i_max_dbm': -104.22878745280337, 'fs_i_max_watt': 3.776772528074103e-14, 'fs_noise_dbm': -94.22878745280337, 'fs_noise_watt': 3.776772460311467e-13, 'num_bs': 9, 'num_cells': 3, 'num_re_sim': 12, 'num_ut': 18, 're_scaling': 138.91666666666666, 'tf_precision': 'single', 'u_per_bs': 2, 'ue_noise_re_dbm': -114.20818753952375, 'ue_noise_re_watt': 3.794728779522947e-15, 'warning_non_integer_re_scaling': True}
+2026-03-14 23:10:13,376 | INFO | freeze_topology=True -> using a single fixed BS/UE geometry for all batches and sweep points.
+2026-03-14 23:10:13,506 | INFO | Sweep enabled=True variable=fs_in_target_db values=[-6.0, -10.0, -14.0]
+2026-03-14 23:10:13,506 | INFO | Monte Carlo: num_batches=2 batch_size=1
+2026-03-14 23:10:13,506 | INFO | Fixed service enabled=True
+2026-03-14 23:10:13,507 | INFO | Sweep point fs_in_target_db=-6.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=9.487e-14 W
+2026-03-14 23:10:14,381 | INFO | Sweep point fs_in_target_db=-10.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=3.777e-14 W
+2026-03-14 23:10:15,213 | INFO | Sweep point fs_in_target_db=-14.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=1.504e-14 W
+2026-03-14 23:10:16,051 | INFO | Saved metrics to results/twc_smoke_bundle/legacy_baseline/legacy_no_fs_20260314_231013/metrics.csv
+2026-03-14 23:10:16,217 | INFO | Saved plot to results/twc_smoke_bundle/legacy_baseline/legacy_no_fs_20260314_231013/figures/summary.png
