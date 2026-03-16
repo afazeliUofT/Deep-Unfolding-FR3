@@ -1,0 +1,9 @@
+{
+  "bs_power_budget_watt": 1.1436042625459284,
+  "experiment_name": "twc_full_bundle",
+  "num_bs": 21,
+  "num_re_sim": 24,
+  "num_ut": 42,
+  "seed": 1,
+  "u_per_bs": 2
+}
