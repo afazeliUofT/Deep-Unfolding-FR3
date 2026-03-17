@@ -16,6 +16,7 @@ from fr3_sim.config import load_config
 from fr3_twc.config_utils import results_root_dir, twc_get
 
 PD_MODES = {"budget_aware_primal_dual", "primal_dual_budgeted", "primal_dual"}
+FR_MODES = {"feasibility_restored_primal_dual", "feasibility_restored", "fr_primal_dual"}
 
 
 def _require(path: Path) -> None:
@@ -27,10 +28,19 @@ def _expected_algorithms(cfg) -> set[str]:
     algos = twc_get(cfg, ("algorithms", "enabled"), None)
     if algos is not None:
         return {str(a) for a in algos}
+    mode = str(twc_get(cfg, ("unfolded", "mode"), "scenario_adaptive")).strip().lower()
     base = {"static_notch_mf", "risk_neutral_pgd", "wideband_pgd"}
+    if mode in PD_MODES or mode in FR_MODES:
+        base.add("budgeted_primal_dual_pgd")
+    if mode in FR_MODES:
+        base.add("budgeted_primal_dual_pgd_repair")
     if bool(twc_get(cfg, ("unfolded", "enabled"), True)):
-        mode = str(twc_get(cfg, ("unfolded", "mode"), "scenario_adaptive")).strip().lower()
-        base.add("budget_aware_primal_dual_unfolded" if mode in PD_MODES else "scenario_adaptive_unfolded")
+        if mode in FR_MODES:
+            base.update({"budget_aware_primal_dual_unfolded", "feasibility_restored_primal_dual_unfolded"})
+        elif mode in PD_MODES:
+            base.add("budget_aware_primal_dual_unfolded")
+        else:
+            base.add("scenario_adaptive_unfolded")
     return base
 
 
