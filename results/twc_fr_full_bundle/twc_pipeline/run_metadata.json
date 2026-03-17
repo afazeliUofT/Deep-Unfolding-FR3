@@ -1,0 +1,19 @@
+{
+  "bs_power_budget_watt": 1.1436042625459284,
+  "enabled_algorithms": [
+    "static_notch_mf",
+    "risk_neutral_pgd",
+    "wideband_pgd",
+    "budgeted_primal_dual_pgd",
+    "budgeted_primal_dual_pgd_repair",
+    "budget_aware_primal_dual_unfolded",
+    "feasibility_restored_primal_dual_unfolded"
+  ],
+  "experiment_name": "twc_fr_full_bundle",
+  "num_bs": 21,
+  "num_re_sim": 24,
+  "num_ut": 42,
+  "seed": 1,
+  "u_per_bs": 2,
+  "unfolded_mode": "feasibility_restored_primal_dual"
+}

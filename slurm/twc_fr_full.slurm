@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=fr3_twc_fr_full
 #SBATCH --account=def-rsadve
-#SBATCH --time=24:00:00
+#SBATCH --time=6:00:00
 #SBATCH --cpus-per-task=12
 #SBATCH --mem=64G
 #SBATCH --gpus-per-node=a100:1
