@@ -1,0 +1,138 @@
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) CCconfig        6)  ucx/1.14.1         11) flexiblas/3.3.1
+  2) gentoo/2023     7)  libfabric/1.18.0   12) blis/0.9.0
+  3) gcccore/.12.3   8)  pmix/4.2.4         13) StdEnv/2023
+  4) gcc/12.3        9)  ucc/1.2.0
+  5) hwloc/2.9.1     10) openmpi/4.1.5
+2026-03-17 01:40:01.148189: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1773726001.293266 3038898 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1773726001.345680 3038898 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1773726001.786557 3038898 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1773726001.786624 3038898 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1773726001.786650 3038898 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1773726001.786673 3038898 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2026-03-17 01:40:01.829881: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Python executable : /home/rsadve1/FR3_DeepUnfolding/fr3_twc_venv/bin/python
+Python version    : 3.11.5
+Repo root         : /home/rsadve1/FR3_DeepUnfolding
+Repo root exists  : True
+Src dir           : /home/rsadve1/FR3_DeepUnfolding/src
+Src dir exists    : True
+Src entries       : deep_unfolding_fr3.egg-info, fr3_sim, fr3_twc
+Data dir          : /home/rsadve1/FR3_DeepUnfolding/data
+Data dir exists   : True
+Data entries      : ised_sms
+sys.path[0:4]     : ['/home/rsadve1/FR3_DeepUnfolding/scripts', '/home/rsadve1/FR3_DeepUnfolding/src', '/cvmfs/soft.computecanada.ca/easybuild/python/site-packages', '/cvmfs/soft.computecanada.ca/custom/python/site-packages']
+tensorflow        : 2.19.1+computecanada
+sionna-no-rt      : 1.2.1
+numpy             : 1.26.4+computecanada
+pandas            : 2.2.3+computecanada
+fr3_sim spec      : /home/rsadve1/FR3_DeepUnfolding/src/fr3_sim/__init__.py
+fr3_twc spec      : /home/rsadve1/FR3_DeepUnfolding/src/fr3_twc/__init__.py
+TF version        : 2.19.1
+Visible GPUs      : 1
+  GPU[0]        : PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')
+fr3_sim         : OK
+fr3_twc         : OK
+sionna          : OK
+
+Probe passed.
+2026-03-17 01:40:13.796170: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1773726013.811053 3039131 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1773726013.815703 3039131 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1773726013.830520 3039131 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1773726013.830552 3039131 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1773726013.830593 3039131 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1773726013.830606 3039131 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2026-03-17 01:40:13.835004: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+I0000 00:00:1773726018.142443 3039131 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 38484 MB memory:  -> device: 0, name: NVIDIA A100-SXM4-40GB, pci bus id: 0000:81:00.0, compute capability: 8.0
+2026-03-17 01:40:19,443 | INFO | Experiment directory: results/twc_rr_full_bundle/legacy_baseline/legacy_budget_dual_20260317_014019
+2026-03-17 01:40:19,443 | INFO | Selected derived parameters: {'bandwidth_sim_hz': 2880000.0, 'bandwidth_total_hz': 200040000.0, 'bs_power_budget_sim_watt': 1.1436042625459284, 'bs_total_tx_power_watt': 79.43284606933594, 'config_dir': '/home/rsadve1/FR3_DeepUnfolding/configs', 'config_path': '/home/rsadve1/FR3_DeepUnfolding/configs/twc_rr_full.yaml', 'fixed_service_enabled': True, 'fs_i_max_dbm': -104.22878745280337, 'fs_i_max_watt': 3.776772528074103e-14, 'fs_noise_dbm': -94.22878745280337, 'fs_noise_watt': 3.776772460311467e-13, 'num_bs': 21, 'num_cells': 7, 'num_re_sim': 24, 'num_ut': 42, 're_scaling': 69.45833333333333, 'tf_precision': 'single', 'u_per_bs': 2, 'ue_noise_re_dbm': -114.20818753952375, 'ue_noise_re_watt': 3.794728779522947e-15, 'warning_non_integer_re_scaling': True}
+2026-03-17 01:40:19,463 | INFO | Sweep enabled=True variable=fs_in_target_db values=[-6.0, -10.0, -14.0]
+2026-03-17 01:40:19,463 | INFO | Monte Carlo: num_batches=4 batch_size=2
+2026-03-17 01:40:19,464 | INFO | Fixed service enabled=True
+2026-03-17 01:40:19,467 | INFO | Sweep point fs_in_target_db=-6.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=9.487e-14 W
+Running legacy_budget_dual ...
+fs_in_target_db=-6.0:   0%|          | 0/4 [00:00<?, ?it/s]WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1773726022.984744 3039131 cuda_solvers.cc:175] Creating GpuSolver handles for stream 0x55c0c126fd90
+fs_in_target_db=-6.0:  25%|██▌       | 1/4 [00:16<00:50, 16.99s/it]fs_in_target_db=-6.0:  50%|█████     | 2/4 [00:30<00:29, 14.79s/it]fs_in_target_db=-6.0:  75%|███████▌  | 3/4 [00:43<00:14, 14.09s/it]fs_in_target_db=-6.0: 100%|██████████| 4/4 [00:56<00:00, 13.75s/it]fs_in_target_db=-6.0: 100%|██████████| 4/4 [00:56<00:00, 14.18s/it]
+2026-03-17 01:41:16,208 | INFO | Sweep point fs_in_target_db=-10.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=3.777e-14 W
+fs_in_target_db=-10.0:   0%|          | 0/4 [00:00<?, ?it/s]fs_in_target_db=-10.0:  25%|██▌       | 1/4 [00:13<00:39, 13.28s/it]fs_in_target_db=-10.0:  50%|█████     | 2/4 [00:26<00:26, 13.27s/it]fs_in_target_db=-10.0:  75%|███████▌  | 3/4 [00:39<00:13, 13.25s/it]fs_in_target_db=-10.0: 100%|██████████| 4/4 [00:53<00:00, 13.27s/it]fs_in_target_db=-10.0: 100%|██████████| 4/4 [00:53<00:00, 13.27s/it]
+2026-03-17 01:42:09,281 | INFO | Sweep point fs_in_target_db=-14.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=1.504e-14 W
+fs_in_target_db=-14.0:   0%|          | 0/4 [00:00<?, ?it/s]fs_in_target_db=-14.0:  25%|██▌       | 1/4 [00:13<00:39, 13.27s/it]fs_in_target_db=-14.0:  50%|█████     | 2/4 [00:26<00:26, 13.27s/it]fs_in_target_db=-14.0:  75%|███████▌  | 3/4 [00:39<00:13, 13.27s/it]fs_in_target_db=-14.0: 100%|██████████| 4/4 [00:53<00:00, 13.26s/it]fs_in_target_db=-14.0: 100%|██████████| 4/4 [00:53<00:00, 13.26s/it]
+2026-03-17 01:43:02,342 | INFO | Saved metrics to results/twc_rr_full_bundle/legacy_baseline/legacy_budget_dual_20260317_014019/metrics.csv
+2026-03-17 01:43:02,515 | INFO | Saved plot to results/twc_rr_full_bundle/legacy_baseline/legacy_budget_dual_20260317_014019/figures/summary.png
+2026-03-17 01:43:02,566 | INFO | Experiment directory: results/twc_rr_full_bundle/legacy_baseline/legacy_hard_null_20260317_014302
+2026-03-17 01:43:02,566 | INFO | Selected derived parameters: {'bandwidth_sim_hz': 2880000.0, 'bandwidth_total_hz': 200040000.0, 'bs_power_budget_sim_watt': 1.1436042625459284, 'bs_total_tx_power_watt': 79.43284606933594, 'config_dir': '/home/rsadve1/FR3_DeepUnfolding/configs', 'config_path': '/home/rsadve1/FR3_DeepUnfolding/configs/twc_rr_full.yaml', 'fixed_service_enabled': True, 'fs_i_max_dbm': -104.22878745280337, 'fs_i_max_watt': 3.776772528074103e-14, 'fs_noise_dbm': -94.22878745280337, 'fs_noise_watt': 3.776772460311467e-13, 'num_bs': 21, 'num_cells': 7, 'num_re_sim': 24, 'num_ut': 42, 're_scaling': 69.45833333333333, 'tf_precision': 'single', 'u_per_bs': 2, 'ue_noise_re_dbm': -114.20818753952375, 'ue_noise_re_watt': 3.794728779522947e-15, 'warning_non_integer_re_scaling': True}
+2026-03-17 01:43:02,578 | INFO | Sweep enabled=True variable=fs_in_target_db values=[-6.0, -10.0, -14.0]
+2026-03-17 01:43:02,578 | INFO | Monte Carlo: num_batches=4 batch_size=2
+2026-03-17 01:43:02,579 | INFO | Fixed service enabled=True
+2026-03-17 01:43:02,581 | INFO | Sweep point fs_in_target_db=-6.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=9.487e-14 W
+Finished legacy_budget_dual: results/twc_rr_full_bundle/legacy_baseline/legacy_budget_dual_20260317_014019
+Running legacy_hard_null ...
+fs_in_target_db=-6.0:   0%|          | 0/4 [00:00<?, ?it/s]fs_in_target_db=-6.0:  25%|██▌       | 1/4 [00:00<00:01,  1.52it/s]fs_in_target_db=-6.0:  50%|█████     | 2/4 [00:01<00:01,  1.67it/s]fs_in_target_db=-6.0:  75%|███████▌  | 3/4 [00:01<00:00,  1.72it/s]fs_in_target_db=-6.0: 100%|██████████| 4/4 [00:02<00:00,  1.76it/s]fs_in_target_db=-6.0: 100%|██████████| 4/4 [00:02<00:00,  1.72it/s]
+2026-03-17 01:43:04,910 | INFO | Sweep point fs_in_target_db=-10.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=3.777e-14 W
+fs_in_target_db=-10.0:   0%|          | 0/4 [00:00<?, ?it/s]fs_in_target_db=-10.0:  25%|██▌       | 1/4 [00:00<00:01,  1.81it/s]fs_in_target_db=-10.0:  50%|█████     | 2/4 [00:01<00:01,  1.81it/s]fs_in_target_db=-10.0:  75%|███████▌  | 3/4 [00:01<00:00,  1.81it/s]fs_in_target_db=-10.0: 100%|██████████| 4/4 [00:02<00:00,  1.81it/s]fs_in_target_db=-10.0: 100%|██████████| 4/4 [00:02<00:00,  1.81it/s]
+2026-03-17 01:43:07,125 | INFO | Sweep point fs_in_target_db=-14.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=1.504e-14 W
+fs_in_target_db=-14.0:   0%|          | 0/4 [00:00<?, ?it/s]fs_in_target_db=-14.0:  25%|██▌       | 1/4 [00:00<00:01,  1.81it/s]fs_in_target_db=-14.0:  50%|█████     | 2/4 [00:01<00:01,  1.80it/s]fs_in_target_db=-14.0:  75%|███████▌  | 3/4 [00:01<00:00,  1.80it/s]fs_in_target_db=-14.0: 100%|██████████| 4/4 [00:02<00:00,  1.80it/s]fs_in_target_db=-14.0: 100%|██████████| 4/4 [00:02<00:00,  1.80it/s]
+2026-03-17 01:43:09,357 | INFO | Saved metrics to results/twc_rr_full_bundle/legacy_baseline/legacy_hard_null_20260317_014302/metrics.csv
+2026-03-17 01:43:09,514 | INFO | Saved plot to results/twc_rr_full_bundle/legacy_baseline/legacy_hard_null_20260317_014302/figures/summary.png
+2026-03-17 01:43:09,563 | INFO | Experiment directory: results/twc_rr_full_bundle/legacy_baseline/legacy_no_fs_20260317_014309
+2026-03-17 01:43:09,563 | INFO | Selected derived parameters: {'bandwidth_sim_hz': 2880000.0, 'bandwidth_total_hz': 200040000.0, 'bs_power_budget_sim_watt': 1.1436042625459284, 'bs_total_tx_power_watt': 79.43284606933594, 'config_dir': '/home/rsadve1/FR3_DeepUnfolding/configs', 'config_path': '/home/rsadve1/FR3_DeepUnfolding/configs/twc_rr_full.yaml', 'fixed_service_enabled': True, 'fs_i_max_dbm': -104.22878745280337, 'fs_i_max_watt': 3.776772528074103e-14, 'fs_noise_dbm': -94.22878745280337, 'fs_noise_watt': 3.776772460311467e-13, 'num_bs': 21, 'num_cells': 7, 'num_re_sim': 24, 'num_ut': 42, 're_scaling': 69.45833333333333, 'tf_precision': 'single', 'u_per_bs': 2, 'ue_noise_re_dbm': -114.20818753952375, 'ue_noise_re_watt': 3.794728779522947e-15, 'warning_non_integer_re_scaling': True}
+2026-03-17 01:43:09,576 | INFO | Sweep enabled=True variable=fs_in_target_db values=[-6.0, -10.0, -14.0]
+2026-03-17 01:43:09,576 | INFO | Monte Carlo: num_batches=4 batch_size=2
+2026-03-17 01:43:09,576 | INFO | Fixed service enabled=True
+2026-03-17 01:43:09,579 | INFO | Sweep point fs_in_target_db=-6.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=9.487e-14 W
+Finished legacy_hard_null: results/twc_rr_full_bundle/legacy_baseline/legacy_hard_null_20260317_014302
+Running legacy_no_fs ...
+fs_in_target_db=-6.0:   0%|          | 0/4 [00:00<?, ?it/s]fs_in_target_db=-6.0:  25%|██▌       | 1/4 [00:00<00:01,  1.71it/s]fs_in_target_db=-6.0:  50%|█████     | 2/4 [00:01<00:01,  1.87it/s]fs_in_target_db=-6.0:  75%|███████▌  | 3/4 [00:01<00:00,  1.93it/s]fs_in_target_db=-6.0: 100%|██████████| 4/4 [00:02<00:00,  1.96it/s]fs_in_target_db=-6.0: 100%|██████████| 4/4 [00:02<00:00,  1.92it/s]
+2026-03-17 01:43:11,660 | INFO | Sweep point fs_in_target_db=-10.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=3.777e-14 W
+fs_in_target_db=-10.0:   0%|          | 0/4 [00:00<?, ?it/s]fs_in_target_db=-10.0:  25%|██▌       | 1/4 [00:00<00:01,  2.01it/s]fs_in_target_db=-10.0:  50%|█████     | 2/4 [00:00<00:01,  2.00it/s]fs_in_target_db=-10.0:  75%|███████▌  | 3/4 [00:01<00:00,  2.00it/s]fs_in_target_db=-10.0: 100%|██████████| 4/4 [00:01<00:00,  2.00it/s]fs_in_target_db=-10.0: 100%|██████████| 4/4 [00:01<00:00,  2.00it/s]
+2026-03-17 01:43:13,658 | INFO | Sweep point fs_in_target_db=-14.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=1.504e-14 W
+fs_in_target_db=-14.0:   0%|          | 0/4 [00:00<?, ?it/s]fs_in_target_db=-14.0:  25%|██▌       | 1/4 [00:00<00:01,  2.02it/s]fs_in_target_db=-14.0:  50%|█████     | 2/4 [00:00<00:00,  2.01it/s]fs_in_target_db=-14.0:  75%|███████▌  | 3/4 [00:01<00:00,  2.01it/s]fs_in_target_db=-14.0: 100%|██████████| 4/4 [00:01<00:00,  2.01it/s]fs_in_target_db=-14.0: 100%|██████████| 4/4 [00:01<00:00,  2.01it/s]
+2026-03-17 01:43:15,648 | INFO | Saved metrics to results/twc_rr_full_bundle/legacy_baseline/legacy_no_fs_20260317_014309/metrics.csv
+2026-03-17 01:43:15,799 | INFO | Saved plot to results/twc_rr_full_bundle/legacy_baseline/legacy_no_fs_20260317_014309/figures/summary.png
+Finished legacy_no_fs: results/twc_rr_full_bundle/legacy_baseline/legacy_no_fs_20260317_014309
+2026-03-17 01:43:17.068074: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1773726197.083132 3041212 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1773726197.087812 3041212 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1773726197.102662 3041212 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1773726197.102697 3041212 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1773726197.102732 3041212 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1773726197.102744 3041212 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2026-03-17 01:43:17.107214: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+I0000 00:00:1773726200.966167 3041212 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 38484 MB memory:  -> device: 0, name: NVIDIA A100-SXM4-40GB, pci bus id: 0000:81:00.0, compute capability: 8.0
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1773726205.098339 3041212 cuda_solvers.cc:175] Creating GpuSolver handles for stream 0x55d939f49630
+Traceback (most recent call last):
+  File "/home/rsadve1/FR3_DeepUnfolding/scripts/twc_run_pipeline.py", line 30, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/rsadve1/FR3_DeepUnfolding/scripts/twc_run_pipeline.py", line 24, in main
+    out_dir = run_pipeline(cfg)
+              ^^^^^^^^^^^^^^^^^
+  File "/home/rsadve1/FR3_DeepUnfolding/src/fr3_twc/pipeline.py", line 541, in run_pipeline
+    alg_results = _run_algorithms(cfg, batch, unfolded_model)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rsadve1/FR3_DeepUnfolding/src/fr3_twc/pipeline.py", line 155, in _run_algorithms
+    out.append(budgeted_primal_dual_pgd_repair_recover(batch, cfg))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rsadve1/FR3_DeepUnfolding/src/fr3_twc/algorithms.py", line 695, in budgeted_primal_dual_pgd_repair_recover
+    w_rec, rec_stats = recover_rate_with_feasible_mask(batch, w_cal, w_rep, cfg, lam=lam_cal)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rsadve1/FR3_DeepUnfolding/src/fr3_twc/algorithms.py", line 645, in recover_rate_with_feasible_mask
+    min_safe_mask = tf.scatter_nd(gather_nd[rank_mask_sorted], tf.ones([tf.reduce_sum(tf.cast(rank_mask_sorted, tf.int32))], dtype=tf.bool), scatter_shape)
+                                  ~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/rsadve1/FR3_DeepUnfolding/fr3_twc_venv/lib/python3.11/site-packages/tensorflow/python/util/traceback_utils.py", line 153, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "/home/rsadve1/FR3_DeepUnfolding/fr3_twc_venv/lib/python3.11/site-packages/tensorflow/python/framework/tensor_shape.py", line 1385, in assert_is_compatible_with
+    raise ValueError("Shapes %s and %s are incompatible" % (self, other))
+ValueError: Shapes (2,) and (24,) are incompatible
