@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=fr3_twc_rc_smoke
 #SBATCH --account=def-rsadve
-#SBATCH --time=08:00:00
+#SBATCH --time=01:00:00
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
 #SBATCH --gpus-per-node=a100:1
