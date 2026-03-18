@@ -1,0 +1,30 @@
+2026-03-18 19:12:42,169 | INFO | Experiment directory: results/twc_bcy_e_full_bundle/legacy_baseline/legacy_budget_dual_20260318_191242
+2026-03-18 19:12:42,185 | INFO | Selected derived parameters: {'bandwidth_sim_hz': 2880000.0, 'bandwidth_total_hz': 200040000.0, 'bs_power_budget_sim_watt': 1.1436042625459284, 'bs_total_tx_power_watt': 79.43284606933594, 'config_dir': '/home/rsadve1/FR3_DeepUnfolding/configs', 'config_path': '/home/rsadve1/FR3_DeepUnfolding/configs/twc_bcy_e_full.yaml', 'fixed_service_enabled': True, 'fs_i_max_dbm': -104.22878745280337, 'fs_i_max_watt': 3.776772528074103e-14, 'fs_noise_dbm': -94.22878745280337, 'fs_noise_watt': 3.776772460311467e-13, 'num_bs': 21, 'num_cells': 7, 'num_re_sim': 24, 'num_ut': 42, 're_scaling': 69.45833333333333, 'tf_precision': 'single', 'u_per_bs': 2, 'ue_noise_re_dbm': -114.20818753952375, 'ue_noise_re_watt': 3.794728779522947e-15, 'warning_non_integer_re_scaling': True}
+2026-03-18 19:12:42,224 | INFO | Sweep enabled=True variable=fs_in_target_db values=[-6.0, -10.0, -14.0]
+2026-03-18 19:12:42,224 | INFO | Monte Carlo: num_batches=4 batch_size=2
+2026-03-18 19:12:42,224 | INFO | Fixed service enabled=True
+2026-03-18 19:12:42,227 | INFO | Sweep point fs_in_target_db=-6.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=9.487e-14 W
+2026-03-18 19:13:38,683 | INFO | Sweep point fs_in_target_db=-10.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=3.777e-14 W
+2026-03-18 19:14:31,611 | INFO | Sweep point fs_in_target_db=-14.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=1.504e-14 W
+2026-03-18 19:15:24,525 | INFO | Saved metrics to results/twc_bcy_e_full_bundle/legacy_baseline/legacy_budget_dual_20260318_191242/metrics.csv
+2026-03-18 19:15:24,733 | INFO | Saved plot to results/twc_bcy_e_full_bundle/legacy_baseline/legacy_budget_dual_20260318_191242/figures/summary.png
+2026-03-18 19:15:24,782 | INFO | Experiment directory: results/twc_bcy_e_full_bundle/legacy_baseline/legacy_hard_null_20260318_191524
+2026-03-18 19:15:24,783 | INFO | Selected derived parameters: {'bandwidth_sim_hz': 2880000.0, 'bandwidth_total_hz': 200040000.0, 'bs_power_budget_sim_watt': 1.1436042625459284, 'bs_total_tx_power_watt': 79.43284606933594, 'config_dir': '/home/rsadve1/FR3_DeepUnfolding/configs', 'config_path': '/home/rsadve1/FR3_DeepUnfolding/configs/twc_bcy_e_full.yaml', 'fixed_service_enabled': True, 'fs_i_max_dbm': -104.22878745280337, 'fs_i_max_watt': 3.776772528074103e-14, 'fs_noise_dbm': -94.22878745280337, 'fs_noise_watt': 3.776772460311467e-13, 'num_bs': 21, 'num_cells': 7, 'num_re_sim': 24, 'num_ut': 42, 're_scaling': 69.45833333333333, 'tf_precision': 'single', 'u_per_bs': 2, 'ue_noise_re_dbm': -114.20818753952375, 'ue_noise_re_watt': 3.794728779522947e-15, 'warning_non_integer_re_scaling': True}
+2026-03-18 19:15:24,796 | INFO | Sweep enabled=True variable=fs_in_target_db values=[-6.0, -10.0, -14.0]
+2026-03-18 19:15:24,796 | INFO | Monte Carlo: num_batches=4 batch_size=2
+2026-03-18 19:15:24,796 | INFO | Fixed service enabled=True
+2026-03-18 19:15:24,799 | INFO | Sweep point fs_in_target_db=-6.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=9.487e-14 W
+2026-03-18 19:15:27,143 | INFO | Sweep point fs_in_target_db=-10.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=3.777e-14 W
+2026-03-18 19:15:29,368 | INFO | Sweep point fs_in_target_db=-14.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=1.504e-14 W
+2026-03-18 19:15:31,593 | INFO | Saved metrics to results/twc_bcy_e_full_bundle/legacy_baseline/legacy_hard_null_20260318_191524/metrics.csv
+2026-03-18 19:15:31,753 | INFO | Saved plot to results/twc_bcy_e_full_bundle/legacy_baseline/legacy_hard_null_20260318_191524/figures/summary.png
+2026-03-18 19:15:31,802 | INFO | Experiment directory: results/twc_bcy_e_full_bundle/legacy_baseline/legacy_no_fs_20260318_191531
+2026-03-18 19:15:31,803 | INFO | Selected derived parameters: {'bandwidth_sim_hz': 2880000.0, 'bandwidth_total_hz': 200040000.0, 'bs_power_budget_sim_watt': 1.1436042625459284, 'bs_total_tx_power_watt': 79.43284606933594, 'config_dir': '/home/rsadve1/FR3_DeepUnfolding/configs', 'config_path': '/home/rsadve1/FR3_DeepUnfolding/configs/twc_bcy_e_full.yaml', 'fixed_service_enabled': True, 'fs_i_max_dbm': -104.22878745280337, 'fs_i_max_watt': 3.776772528074103e-14, 'fs_noise_dbm': -94.22878745280337, 'fs_noise_watt': 3.776772460311467e-13, 'num_bs': 21, 'num_cells': 7, 'num_re_sim': 24, 'num_ut': 42, 're_scaling': 69.45833333333333, 'tf_precision': 'single', 'u_per_bs': 2, 'ue_noise_re_dbm': -114.20818753952375, 'ue_noise_re_watt': 3.794728779522947e-15, 'warning_non_integer_re_scaling': True}
+2026-03-18 19:15:31,816 | INFO | Sweep enabled=True variable=fs_in_target_db values=[-6.0, -10.0, -14.0]
+2026-03-18 19:15:31,816 | INFO | Monte Carlo: num_batches=4 batch_size=2
+2026-03-18 19:15:31,816 | INFO | Fixed service enabled=True
+2026-03-18 19:15:31,819 | INFO | Sweep point fs_in_target_db=-6.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=9.487e-14 W
+2026-03-18 19:15:33,914 | INFO | Sweep point fs_in_target_db=-10.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=3.777e-14 W
+2026-03-18 19:15:35,914 | INFO | Sweep point fs_in_target_db=-14.0 -> snr_db=0.000, P_tot=79.433 W, noise=3.795e-15 W, I_max=1.504e-14 W
+2026-03-18 19:15:37,950 | INFO | Saved metrics to results/twc_bcy_e_full_bundle/legacy_baseline/legacy_no_fs_20260318_191531/metrics.csv
+2026-03-18 19:15:38,112 | INFO | Saved plot to results/twc_bcy_e_full_bundle/legacy_baseline/legacy_no_fs_20260318_191531/figures/summary.png
