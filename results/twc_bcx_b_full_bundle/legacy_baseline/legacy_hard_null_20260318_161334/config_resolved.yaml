@@ -1,0 +1,413 @@
+channel_model:
+  h_e_m: 1.0
+  num_bs_ant: 32
+  num_ut_ant: 4
+  o2i:
+    building_type_probs:
+      high_loss: 0.2
+      low_loss: 0.8
+    enabled: true
+    indoor_distance_m:
+      dist: min_of_two_uniform
+      high_m: 25.0
+      low_m: 0.0
+    inside_loss_coeff_db_per_m: 0.5
+    model: 3gpp_low_high
+    shadow_fading_std_db:
+      high_loss: 6.5
+      low_loss: 4.4
+  pathloss_model: tr38901_umi_street_canyon
+  shadow_fading_enable: true
+  shadow_fading_std_los_db: 4.0
+  shadow_fading_std_nlos_db: 7.82
+experiment:
+  batch_size: 2
+  freeze_topology: false
+  num_batches: 4
+  tf_compile: false
+fixed_service:
+  antenna:
+    correlation: steering_rank1
+    kappa_ant: 1.0
+    l_ant_db: 0.0
+    rx_pattern:
+      a_max_db: 30.0
+      enabled: true
+      pattern: 3gpp_tr38901
+  enabled: true
+  i_max:
+    in_target_db: -10.0
+    mode: noise_plus_in_target
+    ti_objective_source: none
+  i_max_dbm_override: null
+  in_target_db: -10.0
+  ised_sms:
+    antenna_reference_csv: null
+    enabled: true
+    fixed_service_csv: ../data/ised_sms/ised_sms_fixed_service_20250722_header_optimized_7to15GHz.csv
+    radio_reference_csv: null
+    selection:
+      clip_to_bbox: false
+      freq_range_mhz:
+      - 7000.0
+      - 15000.0
+      gta_bbox:
+        lat_max: 44.25
+        lat_min: 43.5
+        lon_max: -78.6
+        lon_min: -80.2
+      location_mode: raw_meters
+      origin_latlon_wgs84:
+      - 43.6532
+      - -79.3832
+      overlap_with_gnb_band: true
+      random_seed: 1231
+      sample_mode: random_without_replacement
+      station_function_regex: (?i)RX
+  noise_figure_db: 5.0
+  noise_power_dbm: null
+  num_receivers: 12
+  parameters:
+    antenna_gain_dbi:
+      dist: trunc_normal
+      max: 46.4
+      min: 13.0
+      mu: 40.98
+      sigma: 3.5
+    azimuth_deg:
+      dist: uniform
+      high: 360.0
+      low: 0.0
+    beamwidth_3db_deg:
+      components:
+      - dist: trunc_normal
+        max: 10.0
+        min: 0.6
+        mu: 1.6
+        sigma: 0.6
+        weight: 0.943
+      - dist: point_mass
+        value: 360.0
+        weight: 0.057
+      dist: mixture
+    frequency_mhz:
+      dist: trunc_normal
+      max: 15000
+      min: 7000
+      mu: 8200
+      sigma: 600
+    height_agl_m:
+      dist: lognormal
+      max: 377.0
+      min: 5.0
+      mu_ln: 3.8501
+      sigma_ln: 0.9546
+      unit: m
+    occupied_bw_khz:
+      dist: lognormal
+      max: 55700
+      min: 5000
+      mu_ln: 10.308952660644293
+      sigma_ln: 0.35
+    rx_threshold_dbw_ber1e3:
+      dist: trunc_normal
+      max: -80.0
+      min: -120.0
+      mu: -97.5
+      sigma: 4.0
+    ti_objective_db:
+      categories:
+      - 34.6
+      - 36.0
+      - 43.6
+      - 38.44
+      - 28.1
+      - 46.6
+      - 49.6
+      - 32.9
+      - 39.7
+      - 21.35
+      dist: categorical
+      probs:
+      - 0.13392857
+      - 0.13244048
+      - 0.13244048
+      - 0.10714286
+      - 0.10714286
+      - 0.10119048
+      - 0.09672619
+      - 0.08482143
+      - 0.05952381
+      - 0.04464286
+  pathloss:
+    itu_p1411_abg:
+      alpha_los: 2.29
+      alpha_nlos: 4.39
+      beta_los: 28.6
+      beta_nlos: -6.27
+      clamp_to_fspl: true
+      d_min_los_m: 55.0
+      d_min_nlos_m: 260.0
+      gamma_los: 1.96
+      gamma_nlos: 2.3
+    los_probability_model: 3gpp_umi_street_canyon
+    model: itu_p1411_above_rooftop_avg
+    shadow_fading_std_los_db: 3.48
+    shadow_fading_std_nlos_db: 6.89
+  placement:
+    margin_m: 3000.0
+    mode: uniform_in_hexgrid_bbox
+  rx_bandwidth_hz: 30000000.0
+  sweep_override_i_max: scale
+noise:
+  extra_noise_db: 0.0
+  temperature_K: 290.0
+  ue_noise_figure_db: 9.0
+output:
+  experiment_name: legacy_hard_null
+  overwrite: true
+  results_root: results/twc_bcx_b_full_bundle/legacy_baseline
+  save_config_resolved: true
+  save_metrics_csv: true
+  save_plots: true
+plotting:
+  dpi: 200
+  enabled: true
+  format: png
+receiver:
+  name: wmmse
+  wmmse:
+    convergence_tol: 1.0e-06
+    damping_w: 1.0
+    dual_step_lambda: 0.01
+    dual_step_mu: 0.01
+    fs_enforcement: hard_null
+    fs_lambda_max: 1.0e+24
+    fs_lambda_min: 0.0
+    fs_lambda_search: false
+    fs_lambda_search_max_iter: 30
+    fs_lambda_search_tol_db: 0.2
+    init: random_scaled
+    lambda_update_mode: ratio
+    num_iterations: 20
+    ridge_regularization: 1.0e-09
+    stop_criterion: delta_w_norm
+    verbose: false
+reproducibility:
+  deterministic_tf: true
+  precision: single
+  seed: 1
+sweep:
+  enabled: true
+  values:
+  - -6.0
+  - -10.0
+  - -14.0
+  variable: fs_in_target_db
+system_model:
+  bs_total_tx_power_dbm: 49.0
+  carrier_frequency_hz: 8200000000.0
+  num_re_sim: 24
+  num_re_total: 1667
+  simulate_full_band: false
+  subcarrier_spacing_hz: 120000.0
+  user_weight_xi: 1.0
+topology:
+  bs_height_m: 10.0
+  downtilt_to_sector_center: true
+  enable_wrap_around: false
+  indoor_probability: 0.8
+  isd_m: 200.0
+  layout: pcp
+  max_ut_height_m: 1.5
+  min_ut_height_m: 1.5
+  num_rings: 1
+  num_ut_per_sector: 2
+  pcp:
+    background_bbox_margin_m: 3000.0
+    background_sites_fraction: 0.2
+    bs_cluster_sigma_m: 900.0
+    hotspot_jitter_sigma_m: 350.0
+    land_constraint:
+      buffer_m: 1000.0
+      enabled: true
+      keep_side: left
+      line_latlon_wgs84:
+      - - 43.3
+        - -80.2
+      - - 43.944
+        - -78.6
+    num_sites: 7
+    sectors_per_site: 3
+    ue_cluster_radius_m: 80.0
+    use_fs_as_parents: true
+  scenario: umi
+  xy_offset_m:
+  - 0.0
+  - 0.0
+twc:
+  algorithm:
+    alpha_cvar: 0.95
+    fixed_cvar_weight: 8.0
+    fixed_damping: 0.75
+    fixed_fs_weight: 15.0
+    fixed_step_size: 0.12
+    pd_calibration_cvar_weight: 3.0
+    pd_calibration_damping: 0.9
+    pd_calibration_dual_boost: 1.5
+    pd_calibration_dual_step: 1.0
+    pd_calibration_primal_step: 0.03
+    pd_calibration_steps: 4
+    pd_cvar_weight: 2.5
+    pd_damping: 0.85
+    pd_dual_init_scale: 0.6
+    pd_dual_step_size: 0.35
+    pd_primal_step_size: 0.05
+    pd_steps: 10
+    pd_violation_clip: 5.0
+    pgd_steps: 10
+    power_weight: 20.0
+    recovery_bisect_iters: 16
+    recovery_cost_quantile: 0.85
+    recovery_feas_margin: 0.999
+    recovery_min_safe_fraction: 0.3
+    recovery_safe_risk_threshold: 0.65
+    recovery_use_lambda_weight: true
+    repair_alpha_min: 0.02
+    repair_eta: 1.2
+    repair_global_margin: 0.997
+    repair_guarantee_feasibility: true
+    repair_iters: 10
+    repair_use_lambda_weight: true
+    repair_violation_tol: 0.0015
+    recovery_num_groups: 8
+  algorithms:
+    enabled:
+    - static_notch_mf
+    - risk_neutral_pgd
+    - wideband_pgd
+    - budgeted_primal_dual_pgd
+    - budgeted_primal_dual_pgd_repair
+    - budgeted_primal_dual_pgd_repair_recover
+    - budget_aware_primal_dual_unfolded
+    - rate_recovered_primal_dual_unfolded
+  coexistence:
+    repair_gate_bias: 0.18
+    soft_gate_temperature: 8.0
+    static_notch_threshold: 0.55
+    use_soft_risk_gate: true
+  eval:
+    batch_size: 2
+    fs_in_target_db_values:
+    - -6.0
+    - -10.0
+    - -14.0
+    num_batches: 6
+    tone_group_sizes:
+    - 1
+    - 2
+    - 4
+    - 6
+    - 8
+    - 12
+    user_weight_profiles:
+    - uniform
+    - inverse_serving_gain
+    - hotspot_priority
+    - lognormal
+  nr:
+    dc_null: true
+    guard_subcarriers: 2
+    num_ofdm_symbols: 14
+    num_subbands: 24
+  teacher:
+    distill:
+      enabled: true
+      epochs: 18
+      interval: 2
+      loss_weights:
+        desired: 1.0
+        fs: 1.0
+        lambda: 0.3
+        power: 0.5
+        tail: 1.5
+        rate: 1.0
+      weight: 0.5
+      weight_end: 0.28
+      weight_start: 0.85
+    dual_step_lambda: 0.01
+    dual_step_mu: 0.01
+    fs_lambda_search: true
+    fs_lambda_search_max_iter: 12
+    num_iterations: 10
+    rr_use_budget_teacher_before_switch: true
+    rr_switch_epoch: 14
+  unfolded:
+    enabled: true
+    epochs: 36
+    excess_slack_final: 0.0
+    excess_slack_start: 0.5
+    grad_clip_norm: 2.5
+    hidden_dim: 64
+    layers: 10
+    learning_rate: 0.00018
+    mode: rate_recovered_primal_dual
+    outage_ramp_end_epoch: 18
+    outage_ramp_start_epoch: 4
+    outage_weight_final: 3.0
+    outage_weight_start: 0.0
+    residual_cvar_weight: 0.8
+    residual_fs_weight: 0.35
+    soft_outage_beta_final: 16.0
+    soft_outage_beta_start: 8.0
+    steps_per_epoch: 16
+    tail_excess_weight_final: 1.5
+    tail_excess_weight_start: 0.0
+    train_batch_size: 2
+    train_fs_in_target_db_values:
+    - -6.0
+    - -10.0
+    - -14.0
+    val_batches: 2
+    train_postprocess_consistency: true
+    train_postprocess_start_epoch: 11
+    raw_rate_anchor_weight: 0.45
+  wideband:
+    delay_spread_distance_exponent: 0.1
+    delay_spread_distance_ref_m: 100.0
+    delay_spread_freq_scaling_exponent: 0.3
+    delay_spread_max_ns: 500.0
+    delay_spread_min_ns: 5.0
+    delay_spread_ref_ns_los: 30.0
+    delay_spread_ref_ns_nlos: 90.0
+    delay_spread_sigma_ln: 0.35
+    los:
+      enabled: true
+      rician_k_db: 7.0
+    max_delay_ns: 400.0
+    num_taps: 8
+    spatial_correlation:
+      rho_bs: 0.6
+      rho_ue: 0.3
+derived:
+  tf_precision: single
+  num_cells: 7
+  num_bs: 21
+  num_ut: 42
+  u_per_bs: 2
+  warning_non_integer_re_scaling: true
+  num_re_sim: 24
+  re_scaling: 69.45833333333333
+  bandwidth_total_hz: 200040000.0
+  bandwidth_sim_hz: 2880000.0
+  bs_total_tx_power_watt: 79.43284606933594
+  bs_power_budget_sim_watt: 1.1436042625459284
+  ue_noise_re_dbm: -114.20818753952375
+  ue_noise_re_watt: 3.794728779522947e-15
+  fixed_service_enabled: true
+  fs_noise_dbm: -94.22878745280337
+  fs_noise_watt: 3.776772460311467e-13
+  fs_i_max_dbm: -104.22878745280337
+  fs_i_max_watt: 3.776772528074103e-14
+  config_dir: /home/rsadve1/FR3_DeepUnfolding/configs
+  config_path: /home/rsadve1/FR3_DeepUnfolding/configs/twc_bcx_b_full.yaml
