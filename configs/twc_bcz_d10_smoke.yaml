@@ -1,0 +1,10 @@
+base_config: configs/twc_bcy_d_smoke.yaml
+output:
+  experiment_name: twc_bcz_d10_smoke_bundle
+twc:
+  eval:
+    fs_in_target_db_values:
+    - -10.0
+  unfolded:
+    train_fs_in_target_db_values:
+    - -10.0
